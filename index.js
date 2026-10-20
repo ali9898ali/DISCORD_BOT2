@@ -1,4 +1,4 @@
-require('dotenv').config();
+Require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
 const {
@@ -47,6 +47,9 @@ for (const file of fs.readdirSync(commandsDir).filter((f) => f.endsWith('.js')))
 client.once(Events.ClientReady, async (c) => {
   console.log(`Logged in as ${c.user.tag}`);
   c.user.setActivity('/play', { type: ActivityType.Listening });
+
+  // 🚀 تشغيل لوحة التحكم الخاصة بالبوت (A_77-System Dashboard)
+  require('./dashboard')(c);
 
   const rest = new REST().setToken(process.env.DISCORD_TOKEN);
   const body = [...c.commands.values()].map((cmd) => cmd.data.toJSON());
