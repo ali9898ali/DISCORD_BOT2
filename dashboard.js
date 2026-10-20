@@ -45,11 +45,9 @@ module.exports = function(client) {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  const dashUser = process.env.DASH_USER || 'admin';
-  const dashPass = process.env.DASH_PASS || 'secret';
-
+  // تم تثبيت اسم المستخدم وكلمة المرور هنا مباشرة لسهولة الدخول
   app.use(basicAuth({
-    users: { [dashUser]: dashPass },
+    users: { 'admin': 'admin123' },
     challenge: true,
     realm: 'A_77-System Dashboard'
   }));
