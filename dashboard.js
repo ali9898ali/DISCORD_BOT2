@@ -44,7 +44,7 @@ module.exports = function(client) {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  // تم إزالة كلمة المرور وأصبح الموقع عاماً ومتاحاً للجميع مباشرة
+  // الموقع الآن عام ومتاح للجميع بدون كلمة مرور
   app.use(express.static(path.join(__dirname, 'public')));
 
   app.get('/api/stats', (req, res) => {
@@ -116,7 +116,7 @@ module.exports = function(client) {
 
   app.post('/api/commands/:name', (req, res) => {
     try {
-      .const { enabled, alias } = req.body;
+      const { enabled, alias } = req.body;
       const cfg = loadConfig();
       if (enabled !== undefined) cfg.commands[req.params.name] = enabled;
       if (alias !== undefined) cfg.aliases[req.params.name] = alias;
