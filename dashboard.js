@@ -1,5 +1,4 @@
 const express = require('express');
-const basicAuth = require('express-basic-auth');
 const path = require('path');
 const fs = require('fs');
 const Database = require('better-sqlite3');
@@ -45,13 +44,7 @@ module.exports = function(client) {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  // تم تثبيت اسم المستخدم وكلمة المرور هنا مباشرة لسهولة الدخول
-  app.use(basicAuth({
-    users: { 'admin': 'admin123' },
-    challenge: true,
-    realm: 'A_77-System Dashboard'
-  }));
-
+  // تم إزالة كلمة المرور وأصبح الموقع عاماً ومتاحاً للجميع مباشرة
   app.use(express.static(path.join(__dirname, 'public')));
 
   app.get('/api/stats', (req, res) => {
@@ -123,7 +116,7 @@ module.exports = function(client) {
 
   app.post('/api/commands/:name', (req, res) => {
     try {
-      const { enabled, alias } = req.body;
+      .const { enabled, alias } = req.body;
       const cfg = loadConfig();
       if (enabled !== undefined) cfg.commands[req.params.name] = enabled;
       if (alias !== undefined) cfg.aliases[req.params.name] = alias;
